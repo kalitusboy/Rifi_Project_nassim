@@ -5,14 +5,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Extract Project Zip
+      - name: Extract and Fix Paths
         run: |
+          # 1. فك ضغط الملف
           unzip RifiElHoudane_V4.zip
-          # نقل الملفات للمسار الرئيسي إذا كانت داخل مجلد مضغوط
-          if [ -d "RifiElHoudane_V4" ]; then
-            mv RifiElHoudane_V4/* .
+          
+          # 2. البحث عن المجلد الذي يحتوي على ملف settings.gradle ونقل محتوياته للمسار الرئيسي
+          PROJECT_ROOT=$(find . -name "settings.gradle" -exec dirname {} \;)
+          if [ "$PROJECT_ROOT" != "." ]; then
+            cp -r $PROJECT_ROOT/* .
           fi
 
       - name: set up JDK 17
@@ -25,11 +29,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
+      - name: Build Debug APK
         run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: my-app-apk
+          name: Rifi-El-Houdane-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          
