@@ -1,0 +1,29 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:orientation="vertical">
+
+<CheckBox android:id="@+id/elec" android:text="كهرباء"/>
+<CheckBox android:id="@+id/gas" android:text="غاز"/>
+<CheckBox android:id="@+id/water" android:text="ماء"/>
+<CheckBox android:id="@+id/sanit" android:text="تطهير"/>
+
+<RadioGroup android:id="@+id/status">
+    <RadioButton android:id="@+id/st1" android:text="في طور الانجاز"/>
+    <RadioButton android:id="@+id/st2" android:text="على مستوى الاعمدة"/>
+    <RadioButton android:id="@+id/st3" android:text="منتهية غير مشغولة"/>
+    <RadioButton android:id="@+id/st4" android:text="منتهية ومشغولة"/>
+</RadioGroup>
+
+<Button
+android:id="@+id/camera"
+android:text="📸 كاميرا"/>
+
+<Button
+android:id="@+id/save"
+android:text="💾 حفظ"/>
+
+<Button
+android:id="@+id/export"
+android:text="📊 Excel"/>
+
+</LinearLayout>
+</ScrollView>
