@@ -8,7 +8,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Extract Project Zip
-        run: unzip RifiElHoudane_V4.zip
+        run: |
+          unzip RifiElHoudane_V4.zip
+          # نقل الملفات للمسار الرئيسي إذا كانت داخل مجلد مضغوط
+          if [ -d "RifiElHoudane_V4" ]; then
+            mv RifiElHoudane_V4/* .
+          fi
 
       - name: set up JDK 17
         uses: actions/setup-java@v4
@@ -28,4 +33,3 @@ jobs:
         with:
           name: my-app-apk
           path: app/build/outputs/apk/debug/app-debug.apk
-          
